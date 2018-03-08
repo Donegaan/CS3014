@@ -15,11 +15,17 @@ runserialsearch: linear
 	./linear
 
 searchparallel: linearPara.c
-	$(CC) -Wall -g -o linearparallel linearPara.c
+	$(CC) -Wall -g -fopenmp -o linearparallel linearPara.c
 
 runparallelsearch: linearparallel
 	./linearparallel
 
+sortserial: mergesort.c
+	$(CC) -Wall -g -o merge mergesort.c
+
+runserialsort: 
+	./merge
+	
 clean: 
 	rm linear linearparallel createitems
 
