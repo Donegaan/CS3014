@@ -1,4 +1,4 @@
-//https://www.tutorialspoint.com/c_standard_library/c_function_fread.htm for fread
+//http://en.cppreference.com/w/c/io/fread for fread
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -6,13 +6,6 @@
 #include <sys/time.h>
 #include "constants.h"
 
-//https://codereview.stackexchange.com/questions/73553/finding-the-size-of-a-file to get file size
-// long fsize(FILE *fp) {
-//     fseek(fp, 0, SEEK_END);
-//     long bytes = ftell(fp);
-//     rewind(fp);
-//     return bytes;
-// }
 
 int main(int argc, const char * argv[]) {
 
@@ -23,22 +16,27 @@ int main(int argc, const char * argv[]) {
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
-    int inputNum;
+    int inputNum,numArray[FILESIZE];
+    size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
+
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
-    // int size = sizeof(int);
-    // long nmemb = fsize(&itemFile);
-    // printf("%d",nmemb);
-    for(int i=0; i<FILESIZE;i++){ // Run through file
-        int number;
-        
-        fscanf(itemFile, "%d", &number); // Read in integer
-        if(number==inputNum){
-            printf("Found %d in file on line %d\n",inputNum,i);
-            found=true;
-        }
-        //fread(buffer, size,nmemb, itemFile);
-	}
+    
+    if(ret_code == FILESIZE) {
+        for(int i=0; i<FILESIZE;i++){ // Run through file
+            if(numArray[i]==inputNum){
+                printf("Found %d in file on line %d\n",inputNum,i);
+                found=true;
+            }
+	    }
+    } else { // error handling
+       if (feof(itemFile))
+          printf("Error reading test.bin: unexpected end of file\n");
+       else if (ferror(itemFile)) {
+           perror("Error reading test.bin");
+       }
+    }
+    
     if(!found){
         printf("Number not found\n");
     }

@@ -1,7 +1,5 @@
 
-# sortserial: compiles the serial sorting code
 # sortparallel: compiles the parallel sorting code
-# runserialsort: run the serial sort program
 # runparallelsort: run the parallel sort program
 
 
@@ -25,9 +23,9 @@ sortserial: mergesort.c
 
 runserialsort: 
 	./merge
-	
+
 clean: 
-	rm linear linearparallel createitems
+	rm linear linearparallel createitems merge
 
 createitems: createItems.c
 	$(CC) -Wall -g -o createitems createItems.c
