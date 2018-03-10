@@ -7,8 +7,6 @@
 #include "constants.h"
 #include "omp.h"
 
-int numArray[FILESIZE];
-
 int main() {
 
     struct timeval tvalBefore, tvalAfter; // Timer to time program
@@ -19,6 +17,8 @@ int main() {
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
     int inputNum;
+    int *numArray;
+    numArray=(int *)malloc(sizeof(int)*FILESIZE);
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
 
     printf("Enter the number to find\n");

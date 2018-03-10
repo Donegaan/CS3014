@@ -6,25 +6,25 @@
 #include <sys/time.h>
 #include "constants.h"
 
-// #define FILESIZE 10000000;
 
 int main() {
 
-    struct timeval tvalBefore, tvalAfter; // Timer to time program
-    gettimeofday (&tvalBefore, NULL);
-    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+   
     
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
     int inputNum;
-    // int FILESIZE=10000000;
     int *numArray;
     numArray=(int *)malloc(sizeof(int)*FILESIZE);
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
 
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
+    struct timeval tvalBefore, tvalAfter; // Timer to time program
+    gettimeofday (&tvalBefore, NULL);
+    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+
     if(ret_code == FILESIZE) {
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){
@@ -48,6 +48,6 @@ int main() {
 
     gettimeofday (&tvalAfter, NULL); // End of timer
     double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
-    printf("Program runtime: %.4f seconds\n",timeAft-timeBef);
+    printf("Search runtime: %.4f seconds\n",timeAft-timeBef);
 }
 
