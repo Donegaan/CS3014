@@ -1,1 +1,0 @@
-const int FILESIZE = 10000000;
