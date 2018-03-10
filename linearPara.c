@@ -5,10 +5,9 @@
 #include <stdbool.h>
 #include <sys/time.h>
 #include "constants.h"
-#include <omp.h>
+#include "omp.h"
 
-
-int main(int argc, const char * argv[]) {
+int main() {
 
     struct timeval tvalBefore, tvalAfter; // Timer to time program
     gettimeofday (&tvalBefore, NULL);
@@ -24,7 +23,7 @@ int main(int argc, const char * argv[]) {
     scanf("%d",&inputNum);
 
     if(ret_code == FILESIZE) {
-        #pragma omp parallel for
+//    #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){
                 printf("Found %d in file on line %d\n",inputNum,i);
@@ -47,5 +46,7 @@ int main(int argc, const char * argv[]) {
     gettimeofday (&tvalAfter, NULL); // End of timer
     double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
     printf("Program runtime: %.4f seconds\n",timeAft-timeBef);
+    
+    return 0;
 }
 

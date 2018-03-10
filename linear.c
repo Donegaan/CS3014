@@ -7,7 +7,7 @@
 #include "constants.h"
 
 
-int main(int argc, const char * argv[]) {
+int main() {
 
     struct timeval tvalBefore, tvalAfter; // Timer to time program
     gettimeofday (&tvalBefore, NULL);

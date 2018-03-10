@@ -63,4 +63,5 @@ Mkfile.old
 dkms.conf
 
 items.txt
+serialSortOut.txt
 .ds_store
