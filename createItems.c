@@ -7,9 +7,9 @@
 int main(int argc, const char *argv[]){
     FILE *f = fopen("items.txt", "w");
     int numArray[FILESIZE];
-    for (int i = 0; i < 10000000; i++){
+    for (int i = 0; i < FILESIZE; i++){
         
-        numArray[i]=rand()%10000000; // Array of numbers
+        numArray[i]=rand()%FILESIZE; // Array of numbers
 
         // fprintf(f, "%d", rand() % 10000000);
         // fprintf(f, "\n"); /* Probably nice to make it a line. */

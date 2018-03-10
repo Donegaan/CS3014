@@ -6,7 +6,7 @@
 #include <sys/time.h>
 #include "constants.h"
 
-int numArray[FILESIZE];
+// #define FILESIZE 10000000;
 
 int main() {
 
@@ -18,7 +18,9 @@ int main() {
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
     int inputNum;
-    
+    // int FILESIZE=10000000;
+    int *numArray;
+    numArray=(int *)malloc(sizeof(int)*FILESIZE);
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
 
