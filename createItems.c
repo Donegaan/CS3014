@@ -6,14 +6,11 @@
 
 int main(int argc, const char *argv[]){
     FILE *f = fopen("items.txt", "w");
-    int numArray[FILESIZE];
+    int *numArray;
+    numArray=(int *)malloc(sizeof(int)*FILESIZE);
     for (int i = 0; i < FILESIZE; i++){
-        
         numArray[i]=rand()%FILESIZE; // Array of numbers
-
-        // fprintf(f, "%d", rand() % 10000000);
-        // fprintf(f, "\n"); /* Probably nice to make it a line. */
     }
     fwrite(numArray,sizeof *numArray,FILESIZE,f); // Writes array to file
-    fclose(f);   
+    fclose(f); 
 }
