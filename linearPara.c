@@ -7,6 +7,8 @@
 #include "constants.h"
 #include "omp.h"
 
+int numArray[FILESIZE];
+
 int main() {
 
     struct timeval tvalBefore, tvalAfter; // Timer to time program
@@ -16,14 +18,14 @@ int main() {
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
-    int inputNum,numArray[FILESIZE];
+    int inputNum;
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
 
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
 
     if(ret_code == FILESIZE) {
-//    #pragma omp parallel for
+   #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){
                 printf("Found %d in file on line %d\n",inputNum,i);

@@ -6,6 +6,7 @@
 #include <sys/time.h>
 #include "constants.h"
 
+int numArray[FILESIZE];
 
 int main() {
 
@@ -16,12 +17,12 @@ int main() {
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
-    int inputNum,numArray[FILESIZE];
-    size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
-
+    int inputNum;
+    
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
-    
+
+    size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
     if(ret_code == FILESIZE) {
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){
@@ -29,7 +30,8 @@ int main() {
                 found=true;
             }
 	    }
-    } else { // error handling
+    } 
+    else { // error handling
        if (feof(itemFile))
           printf("Error reading test.bin: unexpected end of file\n");
        else if (ferror(itemFile)) {

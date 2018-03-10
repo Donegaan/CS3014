@@ -58,10 +58,6 @@ int main(){
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of int
     if(ret_code == FILESIZE) {
         puts("Array read successfully\n");
-        // for(int n = 0; n < 10; ++n) {
-        //     printf("%i ", numArray[n]);
-        // }
-        // putchar('\n');
     } else { // error handling
        if (feof(itemFile))
           printf("Error reading file: unexpected end of file\n");
@@ -72,7 +68,7 @@ int main(){
  
     
     printf("First 10 elements before sorting:\n");
-    for (int i = 0; i <= 10; i++){
+    for (int i = 0; i < 10; i++){
         printf("%d ", numArray[i]);
     }
 
