@@ -8,10 +8,6 @@
 #include "omp.h"
 
 int main() {
-
-    struct timeval tvalBefore, tvalAfter; // Timer to time program
-    gettimeofday (&tvalBefore, NULL);
-    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
     
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
@@ -24,6 +20,9 @@ int main() {
     printf("Enter the number to find\n");
     scanf("%d",&inputNum);
 
+    struct timeval tvalBefore, tvalAfter; // Timer to time program
+    gettimeofday (&tvalBefore, NULL);
+    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
     if(ret_code == FILESIZE) {
    #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
