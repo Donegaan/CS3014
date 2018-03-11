@@ -6,11 +6,8 @@
 #include <sys/time.h>
 #include "constants.h"
 
-
 int main() {
 
-   
-    
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;

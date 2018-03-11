@@ -1,9 +1,3 @@
-
-# sortparallel: compiles the parallel sorting code
-# runparallelsort: run the parallel sort program
-
-
-# files = linear.c
 CC = gcc
 
 searchserial: linear.c
@@ -24,11 +18,17 @@ sortserial: mergesort.c
 runserialsort: 
 	./merge
 
-clean: 
-	rm linear linearparallel createitems merge
+sortparallel: mergeParallel.c
+	$(CC) -Wall -g -fopenmp -o mergepara mergeParallel.c
+
+runparallelsort: 
+	./mergepara
 
 createitems: createItems.c
 	$(CC) -Wall -g -o createitems createItems.c
 
 runcreate: createitems
 	./createitems
+
+clean: 
+	rm linear linearparallel createitems merge mergepara
