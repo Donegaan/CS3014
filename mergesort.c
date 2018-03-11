@@ -49,9 +49,7 @@ void sort(int low, int high)
 }
 
 int main(){
-    struct timeval tvalBefore, tvalAfter; // Timer to time program
-    gettimeofday (&tvalBefore, NULL);
-    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+    
 
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
@@ -72,6 +70,10 @@ int main(){
         printf("%d ", numArray[i]);
     }
 
+    struct timeval tvalBefore, tvalAfter; // Timer to time program
+    gettimeofday (&tvalBefore, NULL);
+    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+
     sort(0, FILESIZE);
     // Will write sorted list back to file
     printf("\n\nFirst 10 elements after sorting:\n");
@@ -87,5 +89,5 @@ int main(){
 
     gettimeofday (&tvalAfter, NULL); // End of timer
     double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
-    printf("\n\nProgram runtime: %.4f seconds\n",timeAft-timeBef);
+    printf("\n\nSorting runtime: %.4f seconds\n",timeAft-timeBef);
 }
