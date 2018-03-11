@@ -1,13 +1,12 @@
 // Initial code: https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_program_in_c.htm
 #include <stdio.h>
+#include <stdlib.h>
 #include "constants.h"
 #include <sys/time.h>
 
-// int a[11] = {10, 14, 19, 26, 27, 31, 33, 35, 42, 44, 0};
-int b[FILESIZE-1];
-int numArray[FILESIZE];
 
-void merging(int low, int mid, int high)
+
+void merging(int low, int mid, int high,int numArray[],int b[])
 {
     int l1, l2, i;
 
@@ -33,18 +32,15 @@ void merging(int low, int mid, int high)
     }
 }
 
-void sort(int low, int high)
+void sort(int low, int high,int numArray[],int b[])
 {
     int mid;
 
     if (low < high){
         mid = (low + high) / 2;
-        sort(low, mid);
-        sort(mid + 1, high);
-        merging(low, mid, high);
-    }
-    else{
-        return;
+        sort(low, mid,numArray,b);
+        sort(mid + 1, high,numArray,b);
+        merging(low, mid, high,numArray,b);
     }
 }
 
@@ -53,8 +49,14 @@ int main(){
     gettimeofday (&tvalBefore, NULL);
     double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
 
+    int *numArray;
+    numArray=(int *)malloc(sizeof(int)*FILESIZE); // Arrays for merge
+    int *b;
+    b=(int *)malloc(sizeof(int)*FILESIZE-1);
+
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
+    
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of int
     if(ret_code == FILESIZE) {
         puts("Array read successfully\n");
@@ -72,7 +74,7 @@ int main(){
         printf("%d ", numArray[i]);
     }
 
-    sort(0, FILESIZE);
+    sort(0, FILESIZE,numArray,b);
     // Will write sorted list back to file
     printf("\n\nFirst 10 elements after sorting:\n");
 
