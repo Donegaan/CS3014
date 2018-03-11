@@ -6,8 +6,11 @@
 #include <sys/time.h>
 #include "constants.h"
 
+
 int main() {
 
+   
+    
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
@@ -47,4 +50,3 @@ int main() {
     double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
     printf("Search runtime: %.4f seconds\n",timeAft-timeBef);
 }
-

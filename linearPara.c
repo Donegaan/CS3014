@@ -24,7 +24,7 @@ int main() {
     gettimeofday (&tvalBefore, NULL);
     double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
     if(ret_code == FILESIZE) {
-    #pragma omp parallel for
+   #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){
                 printf("Found %d in file on line %d\n",inputNum,i);
@@ -50,4 +50,3 @@ int main() {
     
     return 0;
 }
-
