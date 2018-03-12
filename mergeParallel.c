@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "constants.h"
 #include <sys/time.h>
+#include "omp.h"
 
 void merging(int low, int mid, int high,int numArray[],int b[]){
     int l1, l2, i;
@@ -34,8 +35,17 @@ void sort(int low, int high,int numArray[],int b[]){
 
     if (low < high){
         mid = (low + high) / 2; // Find mid point to divide array
-        sort(low, mid,numArray,b); // Sort first half
-        sort(mid + 1, high,numArray,b); // Sort second half
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                sort(low, mid,numArray,b); // Sort first half
+            }
+            #pragma omp section
+            {
+                sort(mid + 1, high,numArray,b); // Sort second half
+            }
+        }
         merging(low, mid, high,numArray,b); // Merge the sorted halves together
     }
 }
