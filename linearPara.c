@@ -12,18 +12,19 @@ int main() {
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
-    int inputNum;
+    srand(time(NULL));
+    int inputNum = rand()%10000000;
     int *numArray;
     numArray=(int *)malloc(sizeof(int)*FILESIZE);
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
 
-    printf("Enter the number to find\n");
-    scanf("%d",&inputNum);
 
     struct timeval tvalBefore, tvalAfter; // Timer to time program
     gettimeofday (&tvalBefore, NULL);
     double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
     if(ret_code == FILESIZE) {
+    omp_set_dynamic(0);     // Explicitly disable dynamic teams
+    omp_set_num_threads(2); // Use 4 threads for all consecutive parallel regions
    #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){

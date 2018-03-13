@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/time.h>
+#include <time.h>
 #include "constants.h"
 
 int main() {
@@ -11,11 +12,10 @@ int main() {
     FILE *itemFile;
     itemFile = fopen("items.txt","r"); // File with ints
     bool found = false;
-    int inputNum;
+    srand(time(NULL));
+    int inputNum  = rand()%10000000;
     int *numArray;
     numArray=(int *)malloc(sizeof(int)*FILESIZE);
-    printf("Enter the number to find\n");
-    scanf("%d",&inputNum);
 
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
     struct timeval tvalBefore, tvalAfter; // Timer to time program
