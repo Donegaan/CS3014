@@ -25,7 +25,7 @@ int main() {
     double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
     if(ret_code == FILESIZE) {
     omp_set_dynamic(0);     // Explicitly disable dynamic teams
-    omp_set_num_threads(1); // Use 4 threads for all consecutive parallel regions
+    omp_set_num_threads(100); // Use X threads for all consecutive parallel regions
    #pragma omp parallel for
         for(int i=0; i<FILESIZE;i++){ // Run through file
             if(numArray[i]==inputNum){

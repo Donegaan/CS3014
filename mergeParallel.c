@@ -35,6 +35,8 @@ void sort(int low, int high,int numArray[],int b[]){
 
     if (low < high){
         mid = (low + high) / 2; // Find mid point to divide array
+        omp_set_dynamic(0);     // Explicitly disable dynamic teams
+        omp_set_num_threads(4); // Use X threads for all consecutive parallel regions
         #pragma omp parallel sections
         {
             #pragma omp section
