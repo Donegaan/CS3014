@@ -19,10 +19,12 @@ int main() {
     numArray=(int *)malloc(sizeof(int)*FILESIZE);
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of doubles
 
+//---------------- Left in timer code so you can see how I did it -----------------------
+    // struct timeval tvalBefore, tvalAfter; // Timer to time program
+    // gettimeofday (&tvalBefore, NULL);
+    // double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
 
-    struct timeval tvalBefore, tvalAfter; // Timer to time program
-    gettimeofday (&tvalBefore, NULL);
-    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+
     if(ret_code == FILESIZE) {
     omp_set_dynamic(0);     // Explicitly disable dynamic teams
     omp_set_num_threads(NUMTHREADS); // Use X threads for all consecutive parallel regions
@@ -35,9 +37,9 @@ int main() {
 	    }
     } else { // error handling
        if (feof(itemFile))
-          printf("Error reading test.bin: unexpected end of file\n");
+          printf("Error reading items.txt: unexpected end of file\n");
        else if (ferror(itemFile)) {
-           perror("Error reading test.bin");
+           perror("Error reading items.txt");
        }
     }
     
@@ -46,9 +48,10 @@ int main() {
     }
     fclose(itemFile);
 
-    gettimeofday (&tvalAfter, NULL); // End of timer
-    double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
-    printf("Program runtime: %.4f seconds\n",timeAft-timeBef);
+//--------------------- Timer Code -----------------------
+    // gettimeofday (&tvalAfter, NULL); // End of timer
+    // double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
+    // printf("Program runtime: %.4f seconds\n",timeAft-timeBef);
     
     return 0;
 }

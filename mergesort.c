@@ -41,9 +41,10 @@ void sort(int low, int high,int numArray[],int b[]){
 }
 
 int main(){
-    struct timeval tvalBefore, tvalAfter; // Timer to time program
-    gettimeofday (&tvalBefore, NULL);
-    double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
+//---------------- Left in timer code so you can see how I did it -----------------------
+    // struct timeval tvalBefore, tvalAfter; // Timer to time program
+    // gettimeofday (&tvalBefore, NULL);
+    // double timeBef = tvalBefore.tv_sec+(tvalBefore.tv_usec/1000000.0);
 
     int *numArray;
     numArray=(int *)malloc(sizeof(int)*FILESIZE); // Arrays for merge
@@ -54,9 +55,7 @@ int main(){
     itemFile = fopen("items.txt","r"); // File with ints
     
     size_t ret_code = fread(numArray, sizeof *numArray, FILESIZE, itemFile); // reads an array of int
-    if(ret_code == FILESIZE) {
-        puts("Array read successfully\n");
-    } else { // error handling
+    if(ret_code != FILESIZE) { // error handling
        if (feof(itemFile))
           printf("Error reading file: unexpected end of file\n");
        else if (ferror(itemFile)) {
@@ -64,26 +63,16 @@ int main(){
        }
     }
  
-    
-    printf("First 10 elements before sorting:\n");
-    for (int i = 0; i < 10; i++){
-        printf("%d ", numArray[i]);
-    }
-
     sort(0, FILESIZE,numArray,b); // Call sorting and merge function
 
-    printf("\n\nFirst 10 elements after sorting:\n");
-
-    for (int i = 0; i < 10; i++){
-        printf("%d ", numArray[i]);
-    }
     FILE *sortFile = fopen("serialSortOut.txt","w"); // Write sorted array to file
     fwrite(numArray,sizeof *numArray,FILESIZE,sortFile);
 
     fclose(sortFile); // Close file streams
     fclose(itemFile);
 
-    gettimeofday (&tvalAfter, NULL); // End of timer
-    double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
-    printf("\n\nProgram runtime: %.4f seconds\n",timeAft-timeBef);
+//---------------- Timer code -----------------------
+    // gettimeofday (&tvalAfter, NULL); // End of timer
+    // double timeAft = tvalAfter.tv_sec+(tvalAfter.tv_usec/1000000.0);
+    // printf("\n\nProgram runtime: %.4f seconds\n",timeAft-timeBef);
 }

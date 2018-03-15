@@ -31,4 +31,4 @@ runcreate: createitems
 	./createitems
 
 clean: 
-	rm linear linearparallel createitems merge mergepara items.txt
+	rm linear linearparallel createitems merge mergepara items.txt serialSortOut.txt
